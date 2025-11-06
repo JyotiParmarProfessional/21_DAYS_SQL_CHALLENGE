@@ -1,3 +1,5 @@
+This Repo includes 21 days sql challenge question with idc. 
+
 Daily Challenge:
 
 Day 1 : List all unique hospital services available in the hospital.
