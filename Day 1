@@ -2,29 +2,25 @@ Topics: Basic SELECT, column selection, viewing data structure
 
 ### Practice Questions:
 
-1. Find all patients who are older than 60 years.
-2. Retrieve all staff members who work in the 'Emergency' service.
-3. List all weeks where more than 100 patients requested admission in any service.
+1. Retrieve all columns from the `patients` table.
+2. Select only the `patient_id`, `name`, and `age` columns from the `patients` table.
+3. Display the first 10 records from the `services_weekly` table.
 
-  ### Daily Challenge:
+### Daily Challenge:
 
-Question: List all unique hospital services available in the hospital.
-
+**Question:** List all unique hospital services available in the hospital.
 
 ***Queries:
 
-#!
-select * from patients
-where age >60 ;
+#1
+select * from services_weekly;
 
 #2
-select patient_id, name, age from patients
-where service = 'Emergency';
+select patient_id, name, age from patients;
 
 #3
-select week, count(patients_admitted)as total
-from services_weekly
-having total>100;
+select * from services_weekly limit 10;
 
-#Chalenge
+#challenge:
 select distinct service  from services_weekly;
+
