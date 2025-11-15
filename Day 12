@@ -1,3 +1,5 @@
+Topics: NULL handling, IS NULL, IS NOT NULL, COALESCE
+
 ## Practice Questions:
 
 1. Find all weeks in services_weekly where no special event occurred.
