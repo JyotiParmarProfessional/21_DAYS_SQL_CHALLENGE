@@ -1,3 +1,5 @@
+Topics: DISTINCT, removing duplicates, unique values
+
 ### Practice Questions:
 
 1. List all unique services in the patients table.
@@ -7,3 +9,22 @@
 ### Daily Challenge:
 
 **Question:** Find all unique combinations of service and event type from the services_weekly table where events are not null or none, along with the count of occurrences for each combination. Order by count descending.
+
+
+***Queries
+
+#1
+select distinct service from patients;
+
+#2
+select distinct role from staff;
+
+#3
+select distinct month from services_weekly;
+
+Challenge:
+select * from services_weekly;
+select distinct service, event, count(*)as count from services_weekly
+where event is not null or event != 'none'
+group by service, event
+order by count desc;
