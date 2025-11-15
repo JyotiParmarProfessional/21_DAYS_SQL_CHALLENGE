@@ -31,3 +31,5 @@ else 'With Event' end as event_status,
 count(week), round(avg(patient_satisfaction),2), round(avg(staff_morale),2) from services_weekly
 group by event_status
 order by avg(patient_satisfaction);
+
+
