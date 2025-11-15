@@ -8,3 +8,26 @@ Topics: NULL handling, IS NULL, IS NOT NULL, COALESCE
 
 Question: 
 Analyze the event impact by comparing weeks with events vs weeks without events. Show: event status ('With Event' or 'No Event'), count of weeks, average patient satisfaction, and average staff morale. Order by average patient satisfaction descending.
+
+
+***Query 
+#1
+select week from services_weekly
+where event = 'none';
+
+#2
+select count(*)as null_count from services_weekly
+where event is null
+or event = '';
+
+#3
+select  distinct service,week , event from services_weekly
+where event is not null
+and event != 'none' and event != ' ';
+
+Challenge Question
+select case when event is null or event = 'none' then 'No Event'
+else 'With Event' end as event_status, 
+count(week), round(avg(patient_satisfaction),2), round(avg(staff_morale),2) from services_weekly
+group by event_status
+order by avg(patient_satisfaction);
