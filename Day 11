@@ -28,3 +28,5 @@ select distinct service, event, count(*)as count from services_weekly
 where event is not null or event != 'none'
 group by service, event
 order by count desc;
+
+
