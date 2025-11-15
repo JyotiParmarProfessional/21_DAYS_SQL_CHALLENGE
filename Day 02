@@ -28,3 +28,4 @@ having total>100;
 select patient_id, name, age, satisfaction
 from patients 
 where service = 'surgery' and satisfaction <70;
+
