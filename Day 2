@@ -7,3 +7,24 @@
 ### Daily Challenge:
 
 **Question:** Find all patients admitted to 'Surgery' service with a satisfaction score below 70, showing their patient_id, name, age, and satisfaction score.
+
+
+***Queries:
+
+#!
+select * from patients
+where age >60 ;
+
+#2
+select patient_id, name, age from patients
+where service = 'Emergency';
+
+#3
+select week, count(patients_admitted)as total
+from services_weekly
+having total>100;
+
+#Chalenge
+select patient_id, name, age, satisfaction
+from patients 
+where service = 'surgery' and satisfaction <70;
