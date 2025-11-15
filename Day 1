@@ -1,3 +1,5 @@
+Topics: Basic SELECT, column selection, viewing data structure
+
 ### Practice Questions:
 
 1. Find all patients who are older than 60 years.
@@ -7,3 +9,22 @@
   ### Daily Challenge:
 
 Question: List all unique hospital services available in the hospital.
+
+
+***Queries:
+
+#!
+select * from patients
+where age >60 ;
+
+#2
+select patient_id, name, age from patients
+where service = 'Emergency';
+
+#3
+select week, count(patients_admitted)as total
+from services_weekly
+having total>100;
+
+#Chalenge
+select distinct service  from services_weekly;
