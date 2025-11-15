@@ -27,3 +27,5 @@ select week, sum(patients_admitted), sum(patients_refused), round(avg(patient_sa
 group by week;
 
 
+
+
