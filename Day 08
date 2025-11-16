@@ -1,3 +1,5 @@
+Topics: UPPER, LOWER, LENGTH, CONCAT, SUBSTRING
+
 ### Practice Questions:
 
 1. Convert all patient names to uppercase.
@@ -8,3 +10,23 @@
 ### Challenged Questions:
 
 Create a patient summary that shows patient_id, full name in uppercase, service in lowercase, age category (if age >= 65 then 'Senior', if age >= 18 then 'Adult', else 'Minor'), and name length. Only show patients whose name length is greater than 10 characters.
+
+***Queries
+
+#1
+select upper(name) from patients;
+
+#2
+select staff_name, length(staff_name) from staff;
+
+#3
+select concat(staff_id, "-", staff_name) from staff;
+
+#Challenge:
+
+select patient_id, upper(name), lower(service), 
+case when age >= 65 then 'Senior'
+when age >= 18 then 'Adult' else 'Minor'end as age_category, 
+length(name)as name_length from patients
+having name_length > 10;
+
