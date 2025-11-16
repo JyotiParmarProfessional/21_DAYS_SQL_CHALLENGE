@@ -1,0 +1,39 @@
+### Practice Questions:
+
+1. Find services that have admitted more than 500 patients in total.
+2. Show services where average patient satisfaction is below 75.
+3. List weeks where total staff presence across all services was less than 50.
+
+### Daily Challenge:
+
+**Question:** Identify services that refused more than 100 patients in total and had an average patient satisfaction below 80. Show service name, total refused, and average satisfaction.
+
+***Queries
+
+#1
+select service, sum(patients_admitted)as Admit_total from services_weekly
+group by service
+having  Admit_total>500;
+
+#2
+select service, round(avg(patient_satisfaction), 0)as avg_sat from services_weekly
+group by service
+having  avg_sat < 75;
+
+#3
+select service, count(staff_name)as total from staff
+group by service 
+having total < 50;
+
+#Challenge:
+
+select 
+   service,   
+   sum(patients_refused) as total_refused,  
+   round(avg(patient_satisfaction), 0 )as avg_satisfaction 
+from services_weekly
+group by service
+having total_refused > 100 and avg_satisfaction < 80;
+
+
+
