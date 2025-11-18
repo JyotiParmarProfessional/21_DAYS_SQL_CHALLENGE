@@ -7,3 +7,28 @@
 ### Daily Challenge:
 
 **Question:** Calculate the average length of stay (in days) for each service, showing only services where the average stay is more than 7 days. Also show the count of patients and order by average stay descending.
+
+
+***Queries:
+
+#1.
+select *, extract(year from arrival_date)as year from patients;
+
+
+#2.
+select *, datediff(departure_date, arrival_date)as stay from patients;
+
+
+#3.
+select * from patients
+where month(arrival_date) = 3;
+
+#Challenge:
+
+
+select service, round(avg(datediff(departure_date, arrival_date)), 0)as stay, count(*) from patients
+group by service
+having stay > 7
+order by stay desc;
+
+
