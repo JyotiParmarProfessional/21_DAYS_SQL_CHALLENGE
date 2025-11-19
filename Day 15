@@ -1,0 +1,40 @@
+Topics: Joining more than two tables, complex relationships
+
+### Practice Questions:
+
+1. Join patients, staff, and staff_schedule to show patient service and staff availability.
+2. Combine services_weekly with staff and staff_schedule for comprehensive service analysis.
+3. Create a multi-table report showing patient admissions with staff information.
+
+### Daily Challenge:
+
+**Question:** Create a comprehensive service analysis report for week 20 showing: service name, total patients admitted that week, total patients refused, average patient satisfaction, count of staff assigned to service, and count of staff present that week. Order by patients admitted descending.
+
+***Queries
+
+#1.
+select p.patient_id, p.name, p.service, s.staff_id, s.staff_name, s.role, ss.week, ss.present 
+from patients p left join staff s on p.service = s.service
+left join staff_schedule ss on s.staff_id = ss.staff_id;
+
+#2.
+select sw.week, sw.service, sw.patients_admitted, sw.patients_request, sw.patients_refused, 
+s.staff_id, s.staff_name, s.role, ss.present from services_weekly sw
+ left join staff s on sw.service = s.service
+left join staff_schedule ss on s.staff_id = ss.staff_id and sw.week = ss.week;
+
+#3.
+select p.patient_id, p.name, p.arrival_date, p.departure_date, p.service, s.week, s.staff_id, s.staff_name, s.role, s.present 
+from patients p left join staff_schedule s on p.service = s.service;
+
+#Challenge:
+select sw.service, sw.patients_admitted, sw.patients_refused, sw.patient_satisfaction, 
+count(distinct s.staff_id)as assigned_staff, sum(case when ss.present = 1 then 1 else 0 end) as staff_present
+from services_weekly  sw left join staff s on sw.service = s.service 
+left join staff_schedule ss on s.staff_id = ss.staff_id and sw.week = ss.week
+where sw.week = 20
+group by sw.service,sw.patients_admitted, sw.patients_refused, sw.patient_satisfaction
+order by sw.patients_admitted desc; 
+
+
+
