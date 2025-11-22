@@ -1,0 +1,50 @@
+Topics: Subqueries in SELECT, derived tables, inline views
+
+### Practice Questions:
+
+1. Show each patient with their service's average satisfaction as an additional column.
+2. Create a derived table of service statistics and query from it.
+3. Display staff with their service's total patient count as a calculated field.
+
+### Daily Challenge:
+
+**Question:** Create a report showing each service with: service name, total patients admitted, the difference between their total admissions and the average admissions across all services, and a rank indicator ('Above Average', 'Average', 'Below Average'). Order by total patients admitted descending.
+
+***Queries
+
+#1.
+select name, p.service, p.satisfaction, (select round(avg(sw.patient_satisfaction),1)as avg_satisfaction
+from services_weekly sw where p.service = sw.service) as avg_sat 
+from patients p
+order by name;
+
+#2.
+with service_table as(select service, sum(patients_request) as request, sum(patients_admitted) as admit, sum(patients_refused) as refuse from services_weekly
+group by service)       -- derive table
+select * from service_table;     -- derive query
+
+
+#3. 
+with patient_count as (select service, sum(patients_admitted) as total_patient from services_weekly 
+group by service)
+select distinct staff_id, staff_name, s.service, p.total_patient from staff s 
+join patient_count p on s.service = p.service
+order by total_patient desc;
+
+
+#Daily Challenge:
+
+with service_report as(select service, sum(patients_admitted) as total_admission
+from services_weekly 
+group by service),
+avg_count as(select avg(total_admission)as avg_admission from service_report)
+select service, total_admission, round((total_admission - avg_admission),2) as difference,
+case when avg_admission > total_admission then 'Below Average'
+     when avg_admission = total_admission then 'Average'
+     else 'Above Average' end as rank_category 
+from service_report s join avg_count 
+order by total_admission desc;
+
+
+
+
