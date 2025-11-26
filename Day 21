@@ -1,0 +1,7 @@
+
+
+### Practice Questions:
+
+1. Create a CTE to calculate service statistics, then query from it.
+2. Use multiple CTEs to break down a complex query into logical steps.
+3. Build a CTE for staff utilization and join it with patient data.
