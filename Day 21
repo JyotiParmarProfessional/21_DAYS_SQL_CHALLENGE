@@ -20,7 +20,9 @@ left join staff_schedule ss on s.service = ss.service
 group by service
 ),
 patient_metrics as(select service, round(avg(age),2)as avg_age, count(*)as patient_count from patients group by service)
-select s.service, total_admission, total_refusal, avg_satisfaction, staff_count, avg_staff,  avg_age, patient_count, admission_rate
+select s.service, total_admission, total_refusal, avg_satisfaction, staff_count, avg_staff,  avg_age, patient_count, admission_rate,
+ ROUND( (0.6 * (s.total_admission* 1.0 / (s.total_admission+ s.total_refusal))) + (0.4 * s.avg_satisfaction), 2 ) as performance_score
 from service_metrics s 
 left join staff_metrics sm on s.service = sm.service
-left join patient_metrics p on s.service = p.service;
+left join patient_metrics p on s.service = p.service
+order by performance_score desc;
