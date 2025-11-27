@@ -5,3 +5,22 @@
 1. Create a CTE to calculate service statistics, then query from it.
 2. Use multiple CTEs to break down a complex query into logical steps.
 3. Build a CTE for staff utilization and join it with patient data.
+
+***Queries 
+
+with service_metrics as(
+select service, sum(patients_admitted)as total_admission, sum(patients_refused)as total_refusal, round(avg(patient_satisfaction),2) as avg_satisfaction, 
+round(case when sum(patients_admitted + patients_refused) = 0 then 0 
+else sum(patients_admitted) * 100.0/ sum(patients_admitted + patients_refused)end,2) as admission_rate
+from services_weekly group by service),
+staff_metrics as (
+select s.service, count(distinct s.staff_id)as staff_count, round(avg(case when present = 1 then 1 else 0 end),2)as avg_staff 
+from staff s  
+left join staff_schedule ss on s.service = ss.service
+group by service
+),
+patient_metrics as(select service, round(avg(age),2)as avg_age, count(*)as patient_count from patients group by service)
+select s.service, total_admission, total_refusal, avg_satisfaction, staff_count, avg_staff,  avg_age, patient_count, admission_rate
+from service_metrics s 
+left join staff_metrics sm on s.service = sm.service
+left join patient_metrics p on s.service = p.service;
