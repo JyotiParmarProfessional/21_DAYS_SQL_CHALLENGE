@@ -1,3 +1,7 @@
+# 21 Days SQL Challenge (Beginner → Advanced)
+
+As we’re on a mission to empower the next generation with practical AI and data skills. Our **21-Days SQL Challenge** is designed to help beginners build a strong foundation in SQL through daily learning, hands-on practice, and real-world problem solving.
+
 This Repo includes 21 days sql challenge question with idc. 
 
 Daily Challenge:
@@ -44,3 +48,5 @@ Day 19 : For each service, rank the weeks by patient satisfaction score (highest
 Day 20 : Create a trend analysis showing for each service and week: week number, patients_admitted, running total of patients admitted (cumulative), 3-week moving average of patient satisfaction (current week and 2 prior weeks), and the difference between current week admissions and the service average. Filter for weeks 10-20 only.
 
 Day 21 : Question: Create a comprehensive hospital performance dashboard using CTEs. Calculate: 1) Service-level metrics (total admissions, refusals, avg satisfaction), 2) Staff metrics per service (total staff, avg weeks present), 3) Patient demographics per service (avg age, count). Then combine all three CTEs to create a final report showing service name, all calculated metrics, and an overall performance score (weighted average of admission rate and satisfaction). Order by performance score descending.
+
+
